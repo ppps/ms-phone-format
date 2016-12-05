@@ -129,7 +129,11 @@
             parts.push(digits.slice(0, len));
             digits = digits.slice(len);
         });
-        return parts[0] + " " + parts[1] + "-" + parts[2];
+        if (part_lengths.length === 3) {
+            return parts[0] + " " + parts[1] + "-" + parts[2];
+        } else if (part_lengths.length === 2) {
+            return parts.join(" ");
+        }
     };
 
     var check_digits = function (candidate, prefixes, lengths) {
@@ -152,7 +156,7 @@
         } else if (check_digits(digits, ["0500", "0800"], [10])) {
             return format_generic(digits, [4, 3, 3]);
         } else if (check_digits(digits, ["08001111", "0845464"], [8])) {
-            return format_generic(digits, [4, 2, 2]);
+            return format_generic(digits, [4, 4]);
         } else {
             return "";
         }
