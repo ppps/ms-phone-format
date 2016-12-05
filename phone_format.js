@@ -142,9 +142,11 @@
         return (pref_match && len_match);
     };
 
-    var format_phone_number = function (input) {
-        var digits = input.split("").map((s) => s.match(/\d/)).join("");
+    var extract_digits = function (input) {
+        return input.split("").map((s) => s.match(/\d/)).join("");
+    };
 
+    var format_phone_number = function (digits) {
         if (check_digits(digits, ["01"], [10, 11])) {
             return format_geographic(digits);
         } else if (check_digits(digits, ["02"], [11])) {
@@ -165,8 +167,11 @@
     document.addEventListener("DOMContentLoaded", function () {
         var input_box = document.getElementById("input");
         var output_box = document.getElementById("output");
+        var count_box = document.getElementById("count");
         input_box.addEventListener("keyup", function () {
-            output_box.innerHTML = format_phone_number(input_box.value);
+            var digits = extract_digits(input_box.value);
+            count_box.innerHTML = 'Number of digits: ' + String(digits.length);
+            output_box.innerHTML = format_phone_number(digits);
         });
     });
 
