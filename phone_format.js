@@ -124,11 +124,10 @@
     };
 
     var format_generic = function (digits, part_lengths) {
-        var working = digits;
         var parts = [];
         part_lengths.forEach(function (len) {
-            parts.push(working.slice(0, len));
-            working = working.slice(len);
+            parts.push(digits.slice(0, len));
+            digits = digits.slice(len);
         });
         return parts[0] + " " + parts[1] + "-" + parts[2];
     };
