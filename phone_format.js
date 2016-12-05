@@ -160,7 +160,8 @@
         }
         else if (check_digits(digits, ['08001111', '0845464'], [8])) {
             return format_generic(digits, [4, 2, 2]);
-        } else {
+        }
+        else {
             return '';
         }
     };
