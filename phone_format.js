@@ -108,8 +108,9 @@
 
     var format_geographic = function (digits) {
         var code = AREA_CODES.find((c) => digits.startsWith(c));
+        var retval;
         if (code === undefined) {
-            return "";
+            retval = "";
         } else {
             var without_code = digits.slice(code.length);
             var midpoint = Math.ceil(without_code.length / 2);
@@ -119,21 +120,24 @@
                 "-" +
                 without_code.slice(midpoint)
             );
-            return formatted;
+            retval = formatted;
         }
+        return retval;
     };
 
     var format_generic = function (digits, part_lengths) {
         var parts = [];
+        var retval;
         part_lengths.forEach(function (len) {
             parts.push(digits.slice(0, len));
             digits = digits.slice(len);
         });
         if (part_lengths.length === 3) {
-            return parts[0] + " " + parts[1] + "-" + parts[2];
+            retval = (parts[0] + " " + parts[1] + "-" + parts[2]);
         } else if (part_lengths.length === 2) {
-            return parts.join(" ");
+            retval = parts.join(" ");
         }
+        return retval;
     };
 
     var check_digits = function (candidate, prefixes, lengths) {
@@ -147,21 +151,23 @@
     };
 
     var format_phone_number = function (digits) {
+        var retval;
         if (check_digits(digits, ["01"], [10, 11])) {
-            return format_geographic(digits);
+            retval = format_geographic(digits);
         } else if (check_digits(digits, ["02"], [11])) {
-            return format_geographic(digits);
+            retval = format_geographic(digits);
         } else if (check_digits(digits, ["07"], [11])) {
-            return format_generic(digits, [5, 3, 3]);
+            retval = format_generic(digits, [5, 3, 3]);
         } else if (check_digits(digits, ["03", "05", "08", "09"], [11])) {
-            return format_generic(digits, [4, 4, 3]);
+            retval = format_generic(digits, [4, 4, 3]);
         } else if (check_digits(digits, ["0500", "0800"], [10])) {
-            return format_generic(digits, [4, 3, 3]);
+            retval = format_generic(digits, [4, 3, 3]);
         } else if (check_digits(digits, ["08001111", "0845464"], [8])) {
-            return format_generic(digits, [4, 4]);
+            retval = format_generic(digits, [4, 4]);
         } else {
-            return "";
+            retval = "";
         }
+        return retval;
     };
 
     document.addEventListener("DOMContentLoaded", function () {
