@@ -166,7 +166,6 @@
         }
     };
 
-
     window.addEventListener('load', function () {
         var input_box = document.getElementById('input');
         var output_box = document.getElementById('output');
