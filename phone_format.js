@@ -170,7 +170,7 @@
         var count_box = document.getElementById("count");
         input_box.addEventListener("keyup", function () {
             var digits = extract_digits(input_box.value);
-            count_box.innerHTML = 'Number of digits: ' + String(digits.length);
+            count_box.innerHTML = "Number of digits: " + String(digits.length);
             output_box.innerHTML = format_phone_number(digits);
         });
     });
