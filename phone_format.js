@@ -106,20 +106,20 @@
     ].reverse();
 
     var format_geographic = function (digits) {
-        for (let code of AREA_CODES) {
-            if (digits.startsWith(code)) {
-                var without_code = digits.slice(code.length);
-                var midpoint = Math.ceil(without_code.length / 2);
-                var formatted = (
-                    '(' + code + ') ' +
-                    without_code.slice(0, midpoint) +
-                    '-' +
-                    without_code.slice(midpoint)
-                );
-                return formatted;
-            }
+        var code = AREA_CODES.find(c => digits.startsWith(c))
+        if (code === undefined) {
+            return '';
+        } else {
+            var without_code = digits.slice(code.length);
+            var midpoint = Math.ceil(without_code.length / 2);
+            var formatted = (
+                '(' + code + ') ' +
+                without_code.slice(0, midpoint) +
+                '-' +
+                without_code.slice(midpoint)
+            );
+            return formatted;
         }
-        return '';
     };
 
     var format_generic = function (digits, part_lengths) {
