@@ -149,16 +149,16 @@
         if (_check_digits(digits, ['01', '02'], [10, 11])) {
             return _format_geographic(digits);
         }
-        else if (_check_digits(digits, ['07'], [11]) {
+        else if (_check_digits(digits, ['07'], [11])) {
             return _format_generic(digits, [5, 3, 3]);
         }
         else if (_check_digits(digits, ['03', '05', '08', '09'], [11])) {
             return _format_generic(digits, [4, 4, 3]);
         }
-        else if (_check_digits(digits, ['0500', '0800'], [10]) {
+        else if (_check_digits(digits, ['0500', '0800'], [10])) {
             return _format_generic(digits, [4, 3, 3]);
         }
-        else if (_check_digits(digits, ['08001111', '0845464'], [8]) {
+        else if (_check_digits(digits, ['08001111', '0845464'], [8])) {
             return _format_generic(digits, [4, 2, 2]);
         } else {
             return '';
