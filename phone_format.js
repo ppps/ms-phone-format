@@ -152,20 +152,31 @@
 
     var format_phone_number = function (digits) {
         var retval;
-        if (check_digits(digits, ["01"], [10, 11])) {
-            retval = format_geographic(digits);
-        } else if (check_digits(digits, ["02"], [11])) {
-            retval = format_geographic(digits);
-        } else if (check_digits(digits, ["07"], [11])) {
-            retval = format_generic(digits, [5, 3, 3]);
-        } else if (check_digits(digits, ["03", "05", "08", "09"], [11])) {
-            retval = format_generic(digits, [4, 4, 3]);
-        } else if (check_digits(digits, ["0500", "0800"], [10])) {
-            retval = format_generic(digits, [4, 3, 3]);
-        } else if (check_digits(digits, ["08001111", "0845464"], [8])) {
-            retval = format_generic(digits, [4, 4]);
-        } else {
+        var format_criteria = [
+            {prefixes: ["01"], lengths: [10, 11],
+                    func: format_geographic},
+            {prefixes: ["02"], lengths: [11],
+                    func: format_geographic},
+            {prefixes: ["07"], lengths: [11],
+                    func: format_generic, parts: [5, 3, 3]},
+            {prefixes: ["03", "05", "08", "09"], lengths: [11],
+                    func: format_generic, parts: [4, 4, 3]},
+            {prefixes: ["0500", "0800"], lengths: [10],
+                    func: format_generic, parts: [4, 3, 3]},
+            {prefixes: ["08001111", "0845464"], lengths: [8],
+                    func: format_generic, parts: [4, 4]}
+        ];
+        var format = format_criteria.find(
+            (obj) => check_digits(digits, obj.prefixes, obj.lengths)
+        );
+        if (format === undefined) {
             retval = "";
+        } else {
+            if (format.hasOwnProperty("parts")) {
+                retval = format.func(digits, format.parts);
+            } else {
+                retval = format.func(digits);
+            }
         }
         return retval;
     };
