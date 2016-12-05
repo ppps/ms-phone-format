@@ -1,6 +1,6 @@
 (function (window, document) {
     'use strict';
-    var _AREA_CODES = [
+    var AREA_CODES = [
         '020', '023', '024', '028', '029', '0113',
         '0114', '0115', '0116', '0117', '0118', '0121',
         '0131', '0141', '0151', '0161', '0191', '01200',
@@ -105,8 +105,8 @@
         '017683', '017684', '017687', '019467'
     ].reverse();
 
-    var _format_geographic = function (digits) {
-        for (let code of _AREA_CODES) {
+    var format_geographic = function (digits) {
+        for (let code of AREA_CODES) {
             if (digits.startsWith(code)) {
                 var without_code = digits.slice(code.length);
                 var midpoint = Math.ceil(without_code.length / 2);
@@ -122,7 +122,7 @@
         return '';
     };
 
-    var _format_generic = function (digits, part_lengths) {
+    var format_generic = function (digits, part_lengths) {
         var working = digits;
         var parts = [];
         for (let len of part_lengths) {
@@ -132,7 +132,7 @@
         return parts[0] + ' ' + parts[1] + '-' + parts[2];
     };
 
-    var _check_digits = function (candidate, prefixes, lengths) {
+    var check_digits = function (candidate, prefixes, lengths) {
         for (let pref of prefixes) {
             for (let len of lengths) {
                 if ((candidate.startsWith(pref)) && (candidate.length === len)) {
@@ -146,20 +146,20 @@
     var format_phone_number = function (input) {
         var digits = input.split('').map( s => s.match(/\d/) ).join('');
 
-        if (_check_digits(digits, ['01', '02'], [10, 11])) {
-            return _format_geographic(digits);
+        if (check_digits(digits, ['01', '02'], [10, 11])) {
+            return format_geographic(digits);
         }
-        else if (_check_digits(digits, ['07'], [11])) {
-            return _format_generic(digits, [5, 3, 3]);
+        else if (check_digits(digits, ['07'], [11])) {
+            return format_generic(digits, [5, 3, 3]);
         }
-        else if (_check_digits(digits, ['03', '05', '08', '09'], [11])) {
-            return _format_generic(digits, [4, 4, 3]);
+        else if (check_digits(digits, ['03', '05', '08', '09'], [11])) {
+            return format_generic(digits, [4, 4, 3]);
         }
-        else if (_check_digits(digits, ['0500', '0800'], [10])) {
-            return _format_generic(digits, [4, 3, 3]);
+        else if (check_digits(digits, ['0500', '0800'], [10])) {
+            return format_generic(digits, [4, 3, 3]);
         }
-        else if (_check_digits(digits, ['08001111', '0845464'], [8])) {
-            return _format_generic(digits, [4, 2, 2]);
+        else if (check_digits(digits, ['08001111', '0845464'], [8])) {
+            return format_generic(digits, [4, 2, 2]);
         } else {
             return '';
         }
