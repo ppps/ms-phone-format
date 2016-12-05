@@ -1,4 +1,4 @@
-var format_phone_number = (function () {
+(function (window, document) {
     'use strict';
     var _AREA_CODES = [
         '020', '023', '024', '028', '029', '0113',
@@ -169,5 +169,13 @@ var format_phone_number = (function () {
         }
     };
 
-    return format_phone_number;
-}());
+
+    window.addEventListener('load', function () {
+        var input_box = document.getElementById('input');
+        var output_box = document.getElementById('output');
+        input_box.addEventListener('keyup', function () {
+            output_box.innerHTML = format_phone_number(input_box.value);
+        });
+    });
+
+}(window, document));
