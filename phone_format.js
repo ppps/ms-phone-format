@@ -133,14 +133,9 @@
     };
 
     var check_digits = function (candidate, prefixes, lengths) {
-        for (let pref of prefixes) {
-            for (let len of lengths) {
-                if ((candidate.startsWith(pref)) && (candidate.length === len)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        var pref_match = prefixes.some(p => candidate.startsWith(p));
+        var len_match = lengths.some(l => candidate.length === l);
+        return (pref_match && len_match);
     };
 
     var format_phone_number = function (input) {
