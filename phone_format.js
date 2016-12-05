@@ -115,7 +115,7 @@
                     without_code.slice(0, midpoint) +
                     '-' +
                     without_code.slice(midpoint)
-                )
+                );
                 return formatted;
             }
         }
