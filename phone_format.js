@@ -125,10 +125,10 @@
     var format_generic = function (digits, part_lengths) {
         var working = digits;
         var parts = [];
-        for (let len of part_lengths) {
+        part_lengths.forEach(function (len) {
             parts.push(working.slice(0, len));
             working = working.slice(len);
-        }
+        });
         return parts[0] + ' ' + parts[1] + '-' + parts[2];
     };
 
