@@ -106,7 +106,7 @@
     ].reverse();
 
     var _format_geographic = function (digits) {
-        for (let code of area_codes) {
+        for (let code of _AREA_CODES) {
             if (digits.startsWith(code)) {
                 var without_code = digits.slice(code.length);
                 var midpoint = Math.ceil(without_code.length / 2);
