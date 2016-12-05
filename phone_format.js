@@ -132,37 +132,33 @@
         return parts[0] + ' ' + parts[1] + '-' + parts[2];
     };
 
-    var format_phone_number = function (input) {
-        var digits = input.split('').map( s => s.match(/\d/) ).join('')
+    var _check_digits = function (candidate, prefixes, lengths) {
+        for (let pref in prefixes) {
+            for (let len in lengths) {
+                if (candidate.startsWith(pref) && candidate.length == len) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    };
 
-        if ((digits.startsWith('01') || digits.startsWith('02')) &&
-            (digits.length > 9 && digits.length < 12))
-        {
+    var format_phone_number = function (input) {
+        var digits = input.split('').map( s => s.match(/\d/) ).join('');
+
+        if (_check_digits(digits, ['01', '02'], [10, 11])) {
             return _format_geographic(digits);
         }
-        else if (digits.startsWith('07') && digits.length === 11)
-        {
+        else if (_check_digits(digits, ['07'], [11]) {
             return _format_generic(digits, [5, 3, 3]);
         }
-        else if (
-            (digits.startsWith('03') ||
-             digits.startsWith('05') ||
-             digits.startsWith('08') ||
-             digits.startsWith('09')) &&
-            digits.length === 11)
-        {
+        else if (_check_digits(digits, ['03', '05', '08', '09'], [11])) {
             return _format_generic(digits, [4, 4, 3]);
         }
-        else if (
-            (digits.startsWith('0500') || digits.startsWith('0800')) &&
-            digits.length === 10)
-        {
+        else if (_check_digits(digits, ['0500', '0800'], [10]) {
             return _format_generic(digits, [4, 3, 3]);
         }
-        else if (
-            (digits === '08001111') ||
-            (digits.startsWith('0845464') && digits.length === 8))
-        {
+        else if (_check_digits(digits, ['08001111', '0845464'], [8]) {
             return _format_generic(digits, [4, 2, 2]);
         } else {
             return '';
