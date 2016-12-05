@@ -146,7 +146,10 @@
     var format_phone_number = function (input) {
         var digits = input.split('').map( s => s.match(/\d/) ).join('');
 
-        if (check_digits(digits, ['01', '02'], [10, 11])) {
+        if (check_digits(digits, ['01'], [10, 11])) {
+            return format_geographic(digits);
+        }
+        else if (check_digits(digits, ['02'], [11])) {
             return format_geographic(digits);
         }
         else if (check_digits(digits, ['07'], [11])) {
