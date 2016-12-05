@@ -151,6 +151,9 @@
     };
 
     var format_phone_number = function (digits) {
+        if (digits.length < 8) {
+            return ""; // Quit early if the number's too short
+        }
         var retval;
         var format_criteria = [
             {prefixes: ["01"], lengths: [10, 11],
