@@ -135,7 +135,7 @@
     var _check_digits = function (candidate, prefixes, lengths) {
         for (let pref in prefixes) {
             for (let len in lengths) {
-                if (candidate.startsWith(pref) && candidate.length == len) {
+                if (candidate.startsWith(pref) && candidate.length === len) {
                     return true;
                 }
             }
