@@ -1,4 +1,4 @@
-(function (window, document) {
+(function (document) {
     "use strict";
     var AREA_CODES = [
         "020", "023", "024", "028", "029", "0113",
@@ -159,7 +159,7 @@
         }
     };
 
-    window.addEventListener("load", function () {
+    document.addEventListener("DOMContentLoaded", function () {
         var input_box = document.getElementById("input");
         var output_box = document.getElementById("output");
         input_box.addEventListener("keyup", function () {
@@ -167,4 +167,4 @@
         });
     });
 
-}(window, document));
+}(document));
