@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <title>Phone format test</title>
+    <script src="phone_format.js"></script>
+    <link rel="stylesheet" src="reset.css">
+    <style>
+    body {
+      background-color: #BD252C;
+      padding: 2rem;
+      font-family: "MyriadPro-Regular", "Helvetica Neue", "Helvetica", sans-serif;
+    }
+    p {
+      max-width: 32.5rem;
+      margin: 0 auto 0.5rem;
+    }
+    input {
+      font-family: "MyriadPro-Regular", "Helvetica Neue", "Helvetica", sans-serif;
+    }
+    .wrapper {
+      background-color: rgba(255, 255, 255, 0.80);
+      max-width: 40rem;
+      margin: 0 auto;
+      padding: 2rem;
+      text-align: center;
+    }
+    .input,
+    .output {
+      width: 100%;
+      text-align: center;
+      font-size: 3rem;
+      height: 4rem;
+      margin: 1rem 0;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <h1>Morning Star phone number formatter</h1>
+      <input type="tel" id="input" class="input" placeholder="Type number here"/>
+      <div id="output" class="output"></div>
+      <p>Note that nothing will be displayed if the phone number is not the right length (ie missing some digits).</p>
+      <p>Mobile numbers should be 11 digits long, landlines 11 or sometimes 10 digits.</p>
+    </div>
+</body>
+</html>
