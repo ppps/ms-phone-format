@@ -16,10 +16,10 @@ css_target = '<link rel="stylesheet" src="reset.css">'
 
 html = html.replace(
     js_target,
-    '<script>{}</script>'.format(js_file.read_text())
+    f'<script>{js_file.read_text()}</script>'
     ).replace(
     css_target,
-    '<style>{}</style>'.format(reset_css_file.read_text())
+    f'<style>{reset_css_file.read_text()}</style>'
     )
 
 output_file.write_text(html)
